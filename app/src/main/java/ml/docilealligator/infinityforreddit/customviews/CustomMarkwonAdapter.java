@@ -1,5 +1,6 @@
 package ml.docilealligator.infinityforreddit.customviews;
 
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ import io.noties.markwon.MarkwonReducer;
 import io.noties.markwon.recycler.MarkwonAdapter;
 import io.noties.markwon.recycler.SimpleEntry;
 import ml.docilealligator.infinityforreddit.R;
+import ml.docilealligator.infinityforreddit.comment.Comment;
 
 public class CustomMarkwonAdapter extends MarkwonAdapter {
     private final SparseArray<Entry<Node, Holder>> entries;
@@ -117,8 +119,16 @@ public class CustomMarkwonAdapter extends MarkwonAdapter {
         final Entry<Node, Holder> entry = getEntry(viewType);
 
         entry.bindHolder(markwon, holder, node);
+//
+//        if ("[deleted]".equals(mPost.getAuthor()) ||
+//                "[deleted]".equals(mPost.getSelfText()) ||
+//                "[removed]".equals(mPost.getSelfText())
+//        ) {
 
         if (holder.itemView instanceof SpoilerOnClickTextView) {
+            Log.d("MYTEST2", ((SpoilerOnClickTextView) holder.itemView).getText().toString());
+//            Comment comment = getCurrentComment(position);
+//            Log.d("MYTEST3", ((SpoilerOnClickTextView) holder.itemView).getText().toString());
             holder.itemView.setOnClickListener(onClickListener);
             holder.itemView.setOnLongClickListener(onLongClickListener);
         } else if (holder.itemView instanceof HorizontalScrollView) {
